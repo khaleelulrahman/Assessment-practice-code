@@ -224,9 +224,9 @@ public class AmazonProduct {
         System.out.println("Trying to click Kindle product...");
         try {
             driver.findElement(
-                    By.xpath("//div[@aria-label='kindle paperwhite']")
+                    By.xpath("//div[@aria-label='kindle paperwhite.']")
             ).click();
-            System.out.println("Kindle Paperwhite item clicked.");
+            System.out.println("Kindle Paperwhite item clicked..");
         } catch (Exception e) {
             System.out.println("Kindle Paperwhite item not found.");
         }
