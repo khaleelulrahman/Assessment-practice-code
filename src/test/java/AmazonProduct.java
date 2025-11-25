@@ -230,6 +230,8 @@ public class AmazonProduct {
         } catch (Exception e) {
             System.out.println("Kindle Paperwhite item not found.");
         }
+        driver.findElement(By.xpath("//*[@id=\"p_36/dynamic-picker-0\"]/span/a/span")).click();
+        System.out.println("upto 150 clicked");
 
         Thread.sleep(6000);
 
@@ -238,17 +240,20 @@ public class AmazonProduct {
         WebElement slider = driver.findElement(
                 By.xpath("//*[@id=\"p_36/range-slider_slider-item_lower-bound-slider\"]")
         );
+        slider.click();
+        Thread.sleep(3000);
+        System.out.println("location of 100 dollar range"+slider.getLocation());
         System.out.println("Slider located successfully.");
 
         // ACTIONS FOR DRAG & DROP
         Actions actions = new Actions(driver);
 
         System.out.println("Dragging slider 50px to the right...");
-        actions.dragAndDropBy(slider, -50, 0).perform();
+        actions.dragAndDropBy(slider, 16, 76).perform();
         Thread.sleep(2000);
 
-        System.out.println("Dragging slider 30px to the left...");
-        actions.dragAndDropBy(slider, -30, 0).perform();
+//        System.out.println("Dragging slider 30px to the left...");
+//        actions.dragAndDropBy(slider, -30, 0).perform();
 
         System.out.println("Slider movement complete.");
         Thread.sleep(2000);
