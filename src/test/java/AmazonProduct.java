@@ -205,7 +205,7 @@ public class AmazonProduct {
         // SEARCH PRODUCT
         System.out.println("Typing 'Kindle Paperwhite' in search box...");
         WebElement searchProductBox = driver.findElement(By.id("twotabsearchtextbox"));
-        searchProductBox.sendKeys("Kindle Paperwhite");
+        searchProductBox.sendKeys("kindle paperwhite");
         System.out.println("Search text entered.");
         Thread.sleep(3000);
 
@@ -224,19 +224,19 @@ public class AmazonProduct {
         System.out.println("Trying to click Kindle product...");
         try {
             driver.findElement(
-                    By.xpath("//div[@aria-label='kindle paperwhite.']")
+                    By.xpath("//div[@aria-label='kindle paperwhite']")
             ).click();
             System.out.println("Kindle Paperwhite item clicked..");
         } catch (Exception e) {
             System.out.println("Kindle Paperwhite item not found.");
         }
 
-        Thread.sleep(3000);
+        Thread.sleep(6000);
 
         // SLIDER DRAG ELEMENT (fixed Xpath)
         System.out.println("Locating price slider handle...");
         WebElement slider = driver.findElement(
-                By.xpath("//*[@id='p_36/range-slider']//span[contains(@class,'a-slider-handle')][1]")
+                By.xpath("//*[@id=\"p_36/range-slider_slider-item_lower-bound-slider\"]")
         );
         System.out.println("Slider located successfully.");
 
@@ -244,7 +244,8 @@ public class AmazonProduct {
         Actions actions = new Actions(driver);
 
         System.out.println("Dragging slider 50px to the right...");
-        actions.dragAndDropBy(slider, 50, 0).perform();
+        actions.dragAndDropBy(slider, -50, 0).perform();
+        Thread.sleep(2000);
 
         System.out.println("Dragging slider 30px to the left...");
         actions.dragAndDropBy(slider, -30, 0).perform();
