@@ -109,10 +109,13 @@ public class AmazonProduct {
 //        System.out.println("Slider movement complete.");
 //        Thread.sleep(2000);
 
-        //click on 4star and up
-        driver.findElement(By.xpath("//*[@id=\"p_72/2661618011\"]/span/div/a/i")).click();
-        System.out.println("4 star and up filter applied");
+//        //click on 4star and up
+//        driver.findElement(By.xpath("//*[@id=\"p_72/2661618011\"]/span/div/a/i")).click();
+//        System.out.println("4 star and up filter applied");
         Thread.sleep(2000);
+//get the price of second product
+        String productPrice = driver.findElement(By.xpath("(//span[@class='a-color-base'][normalize-space()='$5.94'])[1]")).getText();
+        System.out.println("Product Price: " + productPrice);
 
         //selecting second product from the result
         driver.findElement(By.xpath("//span[contains(text(),'3 Pack Anti-Glare Matte Screen Protector for 7\" Ki')]")).click();
@@ -136,9 +139,20 @@ Thread.sleep(3000);
         String prodNameBeforeCheckoutpage=driver.findElement(By.xpath("//div[@class='a-fixed-left-grid-inner']//h5[@id='aod-asin-title-text']")).getText();
         System.out.println(prodNameBeforeCheckoutpage);
         Assert.assertEquals(productName,prodNameBeforeCheckoutpage,"Product names do not match before checkout page.");
+
         //clicking on add to cart
       driver.findElement(By.xpath("//input[@name='submit.addToCart']")).click();
         System.out.println("Product added to cart.");
+
+        Thread.sleep(3000);
+
+        //compare price on added to cart page
+        String priceataddedtoCartpage=driver.findElement(By.xpath("//h2[normalize-space()='$5.94']")).getText();
+        System.out.println(priceataddedtoCartpage+"price at added to cart page");
+        Thread.sleep(3000);
+        Assert.assertEquals(productPrice,priceataddedtoCartpage,"Product prices do not match at added to cart page.");
+
+        //proceed to checkout
         WebElement proceedtoCheckout = wait.until(
                 ExpectedConditions.elementToBeClickable(
                         By.cssSelector("input[value='Proceed to checkout']"))
@@ -147,7 +161,7 @@ Thread.sleep(3000);
 
         // CLOSE BROWSER
         System.out.println("Closing browser...");
-        driver.close();
+        driver.quit();
         System.out.println("Test completed successfully.");
 
     }
