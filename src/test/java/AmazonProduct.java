@@ -13,6 +13,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 
 import java.time.Duration;
 
@@ -117,12 +118,32 @@ public class AmazonProduct {
         driver.findElement(By.xpath("//span[contains(text(),'3 Pack Anti-Glare Matte Screen Protector for 7\" Ki')]")).click();
         System.out.println("second product clicked");
         Thread.sleep(2000);
+
+        //get the name,price of the product
+        String productName = driver.findElement(By.xpath("//span[contains(text(),'3 Pack Anti-Glare Matte Screen Protector for 7\" Ki')]")).getText();
+        System.out.println(productName);
+
         //clicking on see all buying options
-        driver.findElement(By.xpath("//a[@title='See All Buying Options']")).click();
-        Thread.sleep(3000);
+        WebElement seeAllBuyingOptions = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.xpath("//a[@title='See All Buying Options']"))
+        );
+        seeAllBuyingOptions.click();
+//
+Thread.sleep(3000);
+
+//compare product name before adding to cart
+        String prodNameBeforeCheckoutpage=driver.findElement(By.xpath("//div[@class='a-fixed-left-grid-inner']//h5[@id='aod-asin-title-text']")).getText();
+        System.out.println(prodNameBeforeCheckoutpage);
+        Assert.assertEquals(productName,prodNameBeforeCheckoutpage,"Product names do not match before checkout page.");
         //clicking on add to cart
-        driver.findElement(By.xpath("//input[@name='submit.addToCart']")).click();
+      driver.findElement(By.xpath("//input[@name='submit.addToCart']")).click();
         System.out.println("Product added to cart.");
+        WebElement proceedtoCheckout = wait.until(
+                ExpectedConditions.elementToBeClickable(
+                        By.cssSelector("input[value='Proceed to checkout']"))
+        );
+        proceedtoCheckout.click();
 
         // CLOSE BROWSER
         System.out.println("Closing browser...");
