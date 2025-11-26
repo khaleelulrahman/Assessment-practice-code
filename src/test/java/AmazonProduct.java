@@ -208,17 +208,17 @@ public class AmazonProduct {
         searchProductBox.sendKeys("kindle paperwhite");
         System.out.println("Search text entered.");
         Thread.sleep(3000);
-
-        // CLICK PRICE RANGE SLIDER SECTION
-        System.out.println("Checking for Price Range Slider section...");
-        try {
-            driver.findElement(
-                            By.xpath("//*[@id=\"p_36/range-slider\"]/form/div[2]"))
-                    .click();
-            System.out.println("Price slider area clicked.");
-        } catch (Exception e) {
-            System.out.println("Price slider section not found.");
-        }
+//
+//        // CLICK PRICE RANGE SLIDER SECTION
+//        System.out.println("Checking for Price Range Slider section...");
+//        try {
+//            driver.findElement(
+//                            By.xpath("//*[@id=\"p_36/range-slider\"]/form/div[2]"))
+//                    .click();
+//            System.out.println("Price slider area clicked.");
+//        } catch (Exception e) {
+//            System.out.println("Price slider section not found.");
+//        }
 
         // CLICK A PRODUCT (if exists)
         System.out.println("Trying to click Kindle product...");
@@ -230,38 +230,55 @@ public class AmazonProduct {
         } catch (Exception e) {
             System.out.println("Kindle Paperwhite item not found.");
         }
-        driver.findElement(By.xpath("//*[@id=\"p_36/dynamic-picker-0\"]/span/a/span")).click();
-        System.out.println("upto 150 clicked");
+//        driver.findElement(By.xpath("//*[@id=\"p_36/dynamic-picker-0\"]/span/a/span")).click();
+//        System.out.println("upto 150 clicked");
 
-        Thread.sleep(6000);
-
-        // SLIDER DRAG ELEMENT (fixed Xpath)
-        System.out.println("Locating price slider handle...");
-        WebElement slider = driver.findElement(
-                By.xpath("//*[@id=\"p_36/range-slider_slider-item_lower-bound-slider\"]")
-        );
-        slider.click();
         Thread.sleep(3000);
-        System.out.println("location of 100 dollar range"+slider.getLocation());
-        System.out.println("Slider located successfully.");
 
-        // ACTIONS FOR DRAG & DROP
-        Actions actions = new Actions(driver);
+//        // SLIDER DRAG ELEMENT (fixed Xpath)
+//        System.out.println("Locating price slider handle...");
+//        WebElement slider = driver.findElement(
+//                By.xpath("//*[@id=\"p_36/range-slider_slider-item_lower-bound-slider\"]")
+//        );
+//        slider.click();
+//        Thread.sleep(3000);
+//        System.out.println("location of 100 dollar range"+slider.getLocation());
+//        System.out.println("Slider located successfully.");
 
-        System.out.println("Dragging slider 50px to the right...");
-        actions.dragAndDropBy(slider, 16, 76).perform();
+//        // ACTIONS FOR DRAG & DROP
+//        Actions actions = new Actions(driver);
+//
+//        System.out.println("Dragging slider 50px to the right...");
+//        actions.dragAndDropBy(slider, 16, 76).perform();
+//        Thread.sleep(2000);
+//
+////        System.out.println("Dragging slider 30px to the left...");
+////        actions.dragAndDropBy(slider, -30, 0).perform();
+//
+//        System.out.println("Slider movement complete.");
+//        Thread.sleep(2000);
+
+        //click on 4star and up
+        driver.findElement(By.xpath("//*[@id=\"p_72/2661618011\"]/span/div/a/i")).click();
+        System.out.println("4 star and up filter applied");
         Thread.sleep(2000);
 
-//        System.out.println("Dragging slider 30px to the left...");
-//        actions.dragAndDropBy(slider, -30, 0).perform();
-
-        System.out.println("Slider movement complete.");
+        //selecting second product from the result
+        driver.findElement(By.xpath("//span[contains(text(),'3 Pack Anti-Glare Matte Screen Protector for 7\" Ki')]")).click();
+        System.out.println("second product clicked");
         Thread.sleep(2000);
+        //clicking on see all buying options
+        driver.findElement(By.xpath("//a[@title='See All Buying Options']")).click();
+        Thread.sleep(3000);
+        //clicking on add to cart
+        driver.findElement(By.xpath("//input[@name='submit.addToCart']")).click();
+        System.out.println("Product added to cart.");
 
         // CLOSE BROWSER
         System.out.println("Closing browser...");
         driver.close();
         System.out.println("Test completed successfully.");
+
     }
 }
 
