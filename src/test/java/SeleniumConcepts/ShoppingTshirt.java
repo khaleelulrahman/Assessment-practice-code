@@ -1,14 +1,20 @@
 package SeleniumConcepts;
 
+import com.beust.ah.A;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 
+import java.time.Duration;
+
 public class ShoppingTshirt {
+
     public static void main(String[] args) throws InterruptedException {
         System.out.println("displaying shopping website");
         WebDriver driver=new ChromeDriver();
@@ -18,9 +24,11 @@ public class ShoppingTshirt {
         String title= driver.getTitle();
         System.out.println("Title of the page is: "+title);
         Assert.assertEquals(title,"Automation Exercise - Tshirts Products");
+        JavascriptExecutor js = (JavascriptExecutor) driver;
 //        //popup displaying from botom
 //        driver.findElement(By.xpath("//div[@class='grippy-host']")).click();
-        //Register User
+//        /*
+        //******** Register User ********//
         //clicking on signup/login
         WebElement signUpbtn=driver.findElement(By.xpath("//a[contains(@href,'login')]"));
         signUpbtn.click();
@@ -56,8 +64,7 @@ public class ShoppingTshirt {
 
 //        log.info("Invalid email popup verified successfully");
         // Enter valid email
-        emailField.sendKeys("testtes5t33khaleel@gmail.com");
-        JavascriptExecutor js = (JavascriptExecutor) driver;
+        emailField.sendKeys("testtes5t0haleel@gmail.com");
         js.executeScript("window.scrollBy(0, 300);");
 
 
@@ -112,7 +119,7 @@ public class ShoppingTshirt {
         js.executeScript("window.scrollBy(0, 300);");
         //mobile number
         WebElement mobilenumber=driver.findElement(By.id("mobile_number"));
-        mobilenumber.sendKeys("6439567890");
+        mobilenumber.sendKeys("6409567890");
         //click on create account button
         WebElement createAccountbtn=driver.findElement(By.xpath("//button[@data-qa='create-account']"));
         createAccountbtn.click();
@@ -124,9 +131,60 @@ String actualText = successMsg.getText();
 
 Assert.assertEquals(actualText, "ACCOUNT CREATED!");
 
+//// login button
+//        WebElement signUpbtn=driver.findElement(By.xpath("//a[contains(@href,'login')]"));
+//       signUpbtn.click();
+//       WebElement loginEmail=driver.findElement(By.xpath("//input[@type='email' and @data-qa='login-email']"));
+//       loginEmail.sendKeys("testrahman@gmail.com");
+//         WebElement loginPassword=driver.findElement(By.xpath("//input[@type='password' and @data-qa='login-password']"));
+//    loginPassword.sendKeys("test123");
+//    WebElement loginBtn=driver.findElement(By.xpath("//button[@data-qa='login-button']"));
+//    loginBtn.click();
+//    //choosing men's tshirt in category
+//        js.executeScript("window.scrollBy(0, 600);");
+//
+//        WebElement mensTshirtCategory=driver.findElement(By.xpath("//a[@href='#Men']"));
+//    mensTshirtCategory.click();
+//        js.executeScript("window.scrollBy(0, 100);");
+//    WebElement  tshirtProduct=driver.findElement(By.xpath("//a[text()='Tshirts ']"));
+//    tshirtProduct.click();
+////verify page title
+//String tshirtpageTitle=driver.getTitle();
+//Assert.assertEquals(tshirtpageTitle,"Automation Exercise - Tshirts Products");
+//////click on view product then adding to cart
+////        WebElement  viewProductBtn=driver.findElement(By.xpath("//a[@href='/product_details/2']"));
+////        viewProductBtn.click();
+//        // Locate View Product button
+//        WebElement viewProductBtn =
+//                driver.findElement(By.xpath("//a[@href='/product_details/2']"));
+//
+//// Scroll to the element
+//        js.executeScript("arguments[0].scrollIntoView(true);", viewProductBtn);
+//
+//// Click the element
+//        viewProductBtn.click();
+//
+//        WebElement addtoCartBtn=driver.findElement(By.xpath("//button[@type='button']"));
+//        addtoCartBtn.click();
+////        String addedtoCartMsg=driver.findElement(By.xpath("//p[text()='Your product has been added to cart.']")).getText();
+////        //Assert.assertEquals(addedtoCartMsg,"Your product has been added to cart.");
+////        System.out.println(addedtoCartMsg);
+//        By continueShoppingBtn =
+//                By.xpath("//button[normalize-space()='Continue Shopping']");
+//
+//        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+//
+//        WebElement continueBtn =
+//                wait.until(ExpectedConditions.visibilityOfElementLocated(continueShoppingBtn));
+//
+//        continueBtn.click();
+//
+//        Thread.sleep(2000);
 
 
-        Thread.sleep(4000);
+
+
+
         driver.quit();
 
 
