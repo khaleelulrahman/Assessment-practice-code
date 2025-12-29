@@ -22,7 +22,10 @@ public class ShoppingTshirt {
         public  void setUp() {
 
 
-    driver = new ChromeDriver();
+
+
+        driver = new ChromeDriver();
+        js = (JavascriptExecutor) driver;
     System.out.println("displaying shopping website");
 
     driver.get("https://automationexercise.com/category_products/3");
@@ -38,16 +41,21 @@ public class ShoppingTshirt {
 
 //        //******** Register User ********//
         //clicking on signup/login
-        WebElement signUpbtn = driver.findElement(By.xpath("//a[contains(@href,'login')]"));
+Thread.sleep(3000);
+
+    WebElement signUpbtn = driver.findElement(By.xpath("//a[contains(@href,'login')]"));
         signUpbtn.click();
-        //verifying register/login page
+    Thread.sleep(3000);
+
+    //verifying register/login page
         String registerPagetitle = driver.getTitle();
         String actualTitleRegister = "Automation Exercise - Signup / Login";
         System.out.println(registerPagetitle);
         Assert.assertEquals(registerPagetitle, actualTitleRegister);
         //entering name and email for registration
         System.out.println("Entering name and email for registration");
-        WebElement name = driver.findElement(By.name("name"));
+
+    WebElement name = driver.findElement(By.name("name"));
         name.sendKeys("TestUser");
         WebElement email = driver.findElement(By.xpath("(//input[@placeholder='Email Address'])[2]"));
         //email.sendKeys("testkhaleel12@gmail.com");
@@ -72,7 +80,9 @@ public class ShoppingTshirt {
 
 //        log.info("Invalid email popup verified successfully");
         // Enter valid email
-        emailField.sendKeys("tesolo0haleel@gmail.com");
+    emailField.clear();
+
+    emailField.sendKeys("tesolo0haleel@gmail.com");
         js.executeScript("window.scrollBy(0, 300);");
         Thread.sleep(5000);
 
