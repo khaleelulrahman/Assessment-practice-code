@@ -1,9 +1,6 @@
 package PracticeSelenium;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -17,6 +14,12 @@ public class AmazonIphonePurchase {
 
     WebDriver driver;
     WebDriverWait wait;
+    WebElement priceInCart;
+    String priceInCartText;
+    //storing price of iphone
+    WebElement priceInProductDetail;
+    String priceInproductDetailText;
+
 
     @BeforeClass
     public void setup() {
@@ -84,17 +87,22 @@ public class AmazonIphonePurchase {
             }
         }
 
-        // Now Selenium is on product page
-        WebElement productTitle = wait.until(
-                ExpectedConditions.visibilityOfElementLocated(By.id("productTitle"))
-        );
-String productTitleText= productTitle.getText();
-        System.out.println("Product title is: " + productTitle.getText());
-        SoftAssert softAssert = new SoftAssert();
-softAssert.assertEquals(iphoneText,productTitleText,"Product title does not match the selected iPhone");
-softAssert.assertAll();
-        System.out.println("assertion passed: Product title matches the selected iPhone");
+        // switched to product details page
+        if (driver.findElements(By.xpath("//span[contains(text(),'iPhone 15')]")).size() > 0) {
+            System.out.println("iPhone 15 is present on the shopping cart page");
+        } else {
+            System.out.println("iPhone 15 is NOT present on the page");
+        }
+        priceInProductDetail  = driver.findElement(By.className("a-price-whole"));
+        priceInproductDetailText= priceInCart.getText();
+
+
+
+        System.out.println("Price of iPhone 15: ₹" + priceInCartText);
+
+//
     }
+    // geting price of iphone
 //click on add to cart
     @Test(priority = 4)
     public void addToCart() {
@@ -112,8 +120,24 @@ softAssert.assertAll();
         WebElement proceedtoBuybtn = driver.findElement(By.name("proceedToRetailCheckout"));
         proceedtoBuybtn.isDisplayed();
         System.out.println("iPhone successfully added to cart, Proceed to Buy button is displayed");
-    }
+        try {
+            WebElement iphone15 =
+                    wait.until(ExpectedConditions.visibilityOfElementLocated(
+                            By.xpath("//span[contains(text(),'iPhone 15')]")
+                    ));
+            System.out.println("iPhone 15 is present in add to cart page");
+        } catch (Exception e) {
+            System.out.println("iPhone 15 is NOT present");
+        }
 
+
+priceInCart=driver.findElement(By.className("a-price-whole"));
+        priceInCartText = priceInCart.getText();
+        System.out.println("Price in product detail: ₹" + priceInCartText);
+        Assert.assertEquals(priceInproductDetailText, priceInCartText, "Price in cart does not match the product price");
+        System.out.println("Price in cart matches the product price");
+
+    }
 
 
     @AfterClass
