@@ -19,6 +19,7 @@ public class AmazonIphonePurchase {
     //storing price of iphone
     WebElement priceInProductDetail;
     String priceInproductDetailText;
+    WebElement proceedToBuyBtn;
 
 
     @BeforeClass
@@ -94,11 +95,11 @@ public class AmazonIphonePurchase {
             System.out.println("iPhone 15 is NOT present on the page");
         }
         priceInProductDetail  = driver.findElement(By.className("a-price-whole"));
-        priceInproductDetailText= priceInCart.getText();
+        priceInproductDetailText= priceInProductDetail.getText();
 
 
 
-        System.out.println("Price of iPhone 15: ₹" + priceInCartText);
+        System.out.println("Price of iPhone 15 in product detail page: ₹" + priceInproductDetailText);
 
 //
     }
@@ -131,13 +132,27 @@ public class AmazonIphonePurchase {
         }
 
 
-priceInCart=driver.findElement(By.className("a-price-whole"));
+priceInCart=driver.findElement(By.xpath("(//span[@class='a-offscreen'])[2]"));
         priceInCartText = priceInCart.getText();
-        System.out.println("Price in product detail: ₹" + priceInCartText);
-        Assert.assertEquals(priceInproductDetailText, priceInCartText, "Price in cart does not match the product price");
-        System.out.println("Price in cart matches the product price");
-
+        System.out.println("Price in inCart page ₹" + priceInCartText);
+SoftAssert softAssert = new SoftAssert();
+        softAssert.assertEquals(priceInproductDetailText,priceInCartText,"Price mismatch between product detail and cart");
+        softAssert.assertAll();
     }
+    @Test(priority = 6)
+    public void gotoCart()
+    {
+        WebElement cartBtn= driver.findElement(By.xpath("//div[@id='nav-cart-count-container']"));
+        cartBtn.click();
+        System.out.println("Navigated to cart page");
+    }
+//    public void proceedToBuy()
+//    {
+//        proceedToBuyBtn=driver.findElement(By.xpath("//input[@name='proceedToRetailCheckout']"));
+//        proceedToBuyBtn.click();
+//        System.out.println("Proceeded to buy clicked, navigated to sign-in page");
+//
+//    }
 
 
     @AfterClass
