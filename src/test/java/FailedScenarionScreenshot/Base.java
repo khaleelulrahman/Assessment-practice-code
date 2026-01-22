@@ -17,8 +17,9 @@ public class Base {
         driver= new ChromeDriver();
         driver.get("https://www.google.com/");
     }
-    public void failed() throws IOException {
+    public void failed(String testMethodName) throws IOException {
         File srcFile= ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
-        FileUtils.copyFile(srcFile,new File("C:\\Users\\Home\\IdeaProjects\\PracticeCode\\Screenshots\\screenshot.png"));
+        //FileUtils.copyFile(srcFile,new File("C:\\Users\\Home\\IdeaProjects\\PracticeCode\\Screenshots\\screenshot.png"));
+    FileUtils.copyFile(srcFile,new File("C:\\Users\\Home\\IdeaProjects\\PracticeCode\\Screenshots\\"+testMethodName+"_"+".jpg"));
     }
 }

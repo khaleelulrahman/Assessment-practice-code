@@ -18,7 +18,12 @@ initialization();
 driver.quit();
     }
     @Test
-    public void takeScreenshot()
+    public void takeScreenshot1()
+    {
+        Assert.assertEquals(false,true);
+    }
+    @Test
+    public void takeScreenshot2()
     {
         Assert.assertEquals(false,true);
     }

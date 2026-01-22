@@ -21,10 +21,11 @@ public class CustomListener extends Base implements ITestListener {
         // screenshot code will go here
         System.out.println("Failed");
         try {
-            failed();
+            failed(result.getMethod().getMethodName());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
 
     }
 
